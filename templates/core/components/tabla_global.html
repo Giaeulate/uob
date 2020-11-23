@@ -1,0 +1,93 @@
+<!--table id="tabla_global" class="table table-hover"-->
+<style>
+    .page-link {
+        position: relative;
+        display: block;
+        padding: 0.5rem 0.75rem;
+        margin-left: 0;
+        line-height: 1.25;
+        color: #fff;
+        background-color: var(--primary);
+        /*color: #fff;
+    background-color: #00bc8c;*/
+        border: 0 solid transparent;
+    }
+
+    .page-link:hover {
+        z-index: 2;
+        color: #fff;
+        text-decoration: none;
+        background-color: var(--primary);
+        border-color: transparent;
+    }
+
+    .page-item.active .page-link {
+        z-index: 3;
+        color: #fff;
+        background-color: var(--secondary);
+        border-color: transparent;
+    }
+
+    .page-item.disabled .page-link {
+        color: #fff;
+        pointer-events: none;
+        cursor: auto;
+        background-color: var(--secondary);
+        border-color: transparent;
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="col-md-12">
+        <table id="tabla_global" class="table table-striped table-bordered nowrap" cellspacing="0" width="100%">
+            <thead>
+                <td>Codigo</td>
+                <td>País</td>
+                <td>Monitoreo</td>
+                <td>Época</td>
+                <td>Año</td>
+                <td>Fecha muestra</td>
+                <td>Hora Muestra</td>
+                <td>Punto muestra</td>
+                <td>Tipo</td>
+                <td>Departamento</td>
+                <td>Latitud</td>
+                <td>Longitud</td>
+                <td>Zona</td>
+            </thead>
+            <tbody>
+                {% for obj in data %}
+                <tr>
+                    <td>{{obj.codigo}}</td>
+                    <td>{{obj.pais}}</td>
+                    <td>{{obj.monitoreo}}</td>
+                    <td>{{obj.epoca}}</td>
+                    <td>{{obj.anyo}}</td>
+                    <td>{{obj.fecha_muestra}}</td>
+                    <td>{{obj.hora_muestra}}</td>
+                    <td>{{obj.punto_muestra}}</td>
+                    <td>{{obj.tipo}}</td>
+                    <td>{{obj.departamento}}</td>
+                    <td>{{obj.latitud}}</td>
+                    <td>{{obj.longitud}}</td>
+                    <td>{{obj.zona}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#tabla_global').DataTable({
+            scrollX: true,
+            scrollCollapse: true,
+            autoWidth: true,
+            paging: true,
+            columnDefs: [
+                { "width": "150px", "targets": [0, 1] },
+                { "width": "40px", "targets": [4] }
+            ]
+        });
+    });
+</script>

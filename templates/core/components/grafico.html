@@ -1,0 +1,124 @@
+<div class="container-fluid">
+    <!-- Botones Año Mes -->
+    <div class="row">
+        <div class="col">
+          <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseYears" aria-expanded="false" aria-controls="collapseExample">
+            Años
+          </button>
+        </div>
+        <div class="col" style="display: none;">
+          <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseMonths" aria-expanded="false" aria-controls="collapseExample">
+            Meses
+          </button>
+        </div>
+        <div class="col">
+            <!-- Botones graficos -->
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Más Gráficos
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <button class="dropdown-item" onclick="changeChart('pie');">
+                    <i class="chart pie icon"></i>Torta
+                </button>          
+                <button class="dropdown-item" onclick="changeChart('bar');">
+                    <i class="chart bar icon"></i>Barra
+                </button>          
+                <button class="dropdown-item" onclick="changeChart('line');">
+                    <i class="chart line icon"></i>Linea
+                </button>          
+                <button class="dropdown-item" onclick="changeChart('doughnut');">
+                    <i class="bullseye icon"></i>Dona
+                </button>          
+                <button class="dropdown-item" onclick="changeChart('polarArea');">
+                    <i class="chart area icon"></i>Area Polar
+                </button>
+                <button class="dropdown-item" onclick="changeChart('radar');">
+                    <i class="certificate icon"></i>Radar
+                </button>
+                </div>
+            </div>
+            <!-- Fin Botones graficos -->
+        </div>
+    </div>
+    <!-- Lista CheckBox Año-->
+    <div class="row justify-content-md-center">
+    <div class="collapse" id="collapseYears">
+        <br>
+        <div class="row justify-content-md-center">
+        <div class="container">
+            <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="cbxAllYear" onchange="selectAllCbxYear(this)">
+            <label class="custom-control-label" for="cbxAllYear">Seleccionar todo</label>
+            </div>
+        </div>
+        <table class="table table-hover align-content-center">
+            <tbody>
+            <tr class="table-active">
+                {% for year in years %}
+                {% if forloop.counter|divisibleby:5 %}
+                <td>
+                    <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" name="cbxYear" id="cbx{{year}}" value="{{year}}" onchange="cbxYear('{{year}}')">
+                    <label class="custom-control-label" for="cbx{{year}}">{{year}}</label>
+                    </div>
+                </td>
+                <tr>
+                {% else %}
+                <td>
+                    <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" name="cbxYear" id="cbx{{year}}" value="{{year}}" onchange="cbxYear('{{year}}')">
+                    <label class="custom-control-label" for="cbx{{year}}">{{year}}</label>
+                    </div>
+                </td>
+                {% endif %}
+                {% endfor %}
+            </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+    </div>
+    <!-- Fin Lista CheckBox Año-->
+    <br>
+    <!-- Lista CheckBox Mes-->
+    <div class="row justify-content-md-center" style="display: none;">
+    <div class="collapse" id="collapseMonths">
+        <br>
+        <div class="row align-content-center">
+        <div class="container">
+            <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="cbxAllMonth" onClick="selectAllCbxMonth(this)" checked>
+            <label class="custom-control-label" for="cbxAllMonth">Seleccionar todo</label>
+            </div>
+        </div>
+        <table class="table table-hover align-content-center">
+            <tbody>
+            <tr class="table-active">
+                {% for month in months %}
+                {% if forloop.counter|divisibleby:4 %}
+                <td>
+                    <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" value="{{month.mes}}" name="cbxMonth" id="cbx{{month.mes}}" onchange="cbxMes('{{month.mes}}')">
+                    <label class="custom-control-label" for="cbx{{month.mes}}">{{month.mes}}</label>
+                    </div>
+                </td>
+                <tr>
+                {% else %}
+                <td>
+                    <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" value="{{month.mes}}" name="cbxMonth" id="cbx{{month.mes}}" onchange="cbxMes('{{month.mes}}')">
+                    <label class="custom-control-label" for="cbx{{month.mes}}">{{month.mes}}</label>
+                    </div>
+                </td>
+                {% endif %}
+                {% endfor %}
+            </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+    </div>
+    <!-- Fin Lista CheckBox Mes-->
+    <!-- Fin Botones Año Mes -->
+</div>

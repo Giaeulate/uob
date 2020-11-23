@@ -1,0 +1,99 @@
+{% load leaflet_tags %}
+{% load static %}
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="http://www.abc.gob.bo/">ABC</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'core:home' %}">Inicio<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" onclick="showhidemap();"  href="#">Mostrar/Ocultar Mapa<span class="sr-only"></span></a>
+        </li>
+      </ul>
+      <button class="btn btn-primary" onclick="get_via();">Buscar</button>
+      <select multiple id="select1" class="selectpicker"  data-live-search="true" data-style="btn-primary">
+        {% for obj in rutas %}
+        <optgroup label="RUTAS">
+        <option value="{{ obj }}">{{ obj }}</option>
+        </optgroup>
+        {% endfor %}
+        {% for obj in tramos %}
+        <optgroup label="TRAMOS">
+        <option value="{{ obj }}">{{ obj }}</option>
+        </optgroup>
+        {% endfor %}
+        {% for obj in rodaduras %}
+        <optgroup label="RODADURA">
+        <option value="{{ obj }}">{{ obj }}</option>
+        </optgroup>
+        {% endfor %}
+        {% for obj in tipos %}
+        <optgroup label="TIPOS">
+        <option value="{{ obj }}">{{ obj }}</option>
+        </optgroup>
+        {% endfor %}
+        {% for obj in estaciones %}
+        <optgroup label="ESTACIONES">
+        <option value="{{ obj }}">{{ obj }}</option>
+        </optgroup>
+        {% endfor %}
+      </select>
+    </div>
+  </nav>
+  <style>
+    .bootstrap-select .bs-ok-default::after {
+      width: 0.3em;
+      height: 0.6em;
+      border-width: 0 0.1em 0.1em 0;
+      transform: rotate(45deg) translateY(0.5rem);
+      }
+
+      .btn.dropdown-toggle:focus {
+          outline: none !important;
+      }
+  </style>
+<script>
+  tail.select('#select1', {
+      search: true,
+      multiple: true,
+      locale: "es",
+      placeholder: 'Capas', 
+      //deselect: true,
+  });
+
+  $('select#select1').on('change',function(){
+      
+    v_rodaduras = [];
+    v_tipos = [];
+    v_estaciones = [];
+    v_years = [];
+    v_tramos = [];
+    v_rutas = [];
+      
+    $('#select1').find("option:selected").each(function(){
+        var label = $(this).parent().attr("label");         
+        if (label == 'RUTAS'){
+          v_rutas.push($(this).val());
+        }else if (label == 'TRAMOS'){
+          v_tramos.push($(this).val());
+        }else if (label == 'RODADURA'){
+          v_rodaduras.push($(this).val());
+        }else if (label == 'TIPOS'){
+          v_tipos.push($(this).val());
+        }else if (label == 'ESTACIONES'){
+          v_estaciones.push($(this).val());
+        }/*else{
+            valor_departamentos.push($(this).val());
+        }*/
+        
+    });
+    //get_via();
+  });
+</script>

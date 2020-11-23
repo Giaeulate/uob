@@ -1,0 +1,40 @@
+{% load leaflet_tags %}
+{% load static %}
+
+<style>
+    .my-label {
+        position: absolute;
+        color: white;
+        background-color: #0087FF;
+        width: 1000px;
+        font-size: 20px;
+    }
+</style>
+
+<script>
+    function our_layers(map, options) {
+        mapa = map;
+        baseLayers = {
+            "OSM": osm,
+            "Topo": OpenTopoMap,
+            //"Positron 1": positron1,
+            //"Positron 2": positron2,
+            "Satellite": satellite,
+        };
+
+        lyrControl = new L.control.groupedLayers(baseLayers);
+        osm.addTo(mapa);
+        mapa.addControl(lyrControl);
+        mapa.setView([-16, -66], 6);
+    }
+</script>
+
+<style type="text/css">
+    #gis {
+        /*width: 700px;*/
+        /*width: 130;*/
+        height: 700px;
+        /*height: 700px;*/
+    }
+</style>
+{% leaflet_map "gis" callback="window.our_layers" %}
